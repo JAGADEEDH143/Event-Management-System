@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Eventide</title>
+  <meta name="description" content="Browse Eventide's portfolio of weddings, corporate events, concerts and private celebrations." />
+  <meta name="theme-color" content="#0f0d15" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .gallery-grid figure { position:relative; overflow:hidden; border-radius:var(--radius); cursor:pointer; aspect-ratio:4/3; }
+    .gallery-grid img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+    .gallery-grid figure:hover img { transform:scale(1.1); }
+    .gallery-grid figcaption { position:absolute; inset:auto 0 0 0; padding:16px; background:linear-gradient(transparent,rgba(15,13,21,.9)); color:var(--white); font-weight:600; transform:translateY(8px); opacity:0; transition:all .35s var(--ease); }
+    .gallery-grid figure:hover figcaption { transform:translateY(0); opacity:1; }
+    .filters { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:36px; }
+    .filter-btn { padding:10px 20px; border-radius:999px; background:var(--surface-2); border:1px solid var(--line); color:var(--muted); cursor:pointer; transition:all .25s var(--ease); }
+    .filter-btn.active, .filter-btn:hover { background:var(--brand); color:#1a1508; border-color:var(--brand); }
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; z-index:200; padding:20px; }
+    .lightbox.open { display:flex; animation:fadeIn .3s var(--ease); }
+    .lightbox img { max-width:92%; max-height:88%; border-radius:var(--radius); }
+    .lightbox__close { position:absolute; top:22px; right:26px; background:none; border:0; color:#fff; font-size:2.4rem; cursor:pointer; line-height:1; }
+    @media(max-width:860px){ .gallery-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:640px){ .gallery-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="logo"><span class="logo__mark">E</span>Event<span>ide</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li><li><a href="calendar.html">Availability</a></li>
+        <li><a href="booking.html">Booking</a></li><li><a href="tickets.html">Tickets</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li><li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="booking.html" class="btn btn--primary">Book Now</a>
+        <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+  <div class="mobile-panel">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="calendar.html">Availability</a><a href="booking.html">Booking</a><a href="tickets.html">Tickets</a>
+    <a href="gallery.html" class="active">Gallery</a><a href="contact.html">Contact</a>
+    <a href="booking.html" class="btn btn--primary btn--block">Book Now</a>
+  </div>
+
+  <section class="page-banner">
+    <div class="container">
+      <span class="eyebrow reveal">Portfolio</span>
+      <h1 class="reveal" data-delay="1">Moments we've created</h1>
+      <p class="reveal" data-delay="2">A glimpse into the events we've had the honor of bringing to life.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Gallery</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">Weddings</button>
+        <button class="filter-btn" data-filter="corporate">Corporate</button>
+        <button class="filter-btn" data-filter="concert">Concerts</button>
+        <button class="filter-btn" data-filter="party">Parties</button>
+      </div>
+      <div class="gallery-grid reveal" data-delay="1">
+        <figure data-cat="wedding"><img src="public/images/wedding.png" alt="Wedding reception" /><figcaption>Garden Wedding</figcaption></figure>
+        <figure data-cat="corporate"><img src="public/images/corporate.png" alt="Corporate event" /><figcaption>Tech Summit 2025</figcaption></figure>
+        <figure data-cat="concert"><img src="public/images/concert.png" alt="Concert" /><figcaption>Summer Live Fest</figcaption></figure>
+        <figure data-cat="party"><img src="public/images/party.png" alt="Birthday party" /><figcaption>Milestone Birthday</figcaption></figure>
+        <figure data-cat="wedding"><img src="public/images/hero.png" alt="Gala hall" /><figcaption>Grand Ballroom Gala</figcaption></figure>
+        <figure data-cat="corporate"><img src="public/images/catering.png" alt="Catering display" /><figcaption>Award Night Dinner</figcaption></figure>
+        <figure data-cat="concert"><img src="public/images/cta.png" alt="Event venue" /><figcaption>Rooftop Session</figcaption></figure>
+        <figure data-cat="party"><img src="public/images/team.png" alt="Team celebration" /><figcaption>Company Anniversary</figcaption></figure>
+        <figure data-cat="wedding"><img src="public/images/catering.png" alt="Wedding catering" /><figcaption>Reception Feast</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+    <img src="" alt="Enlarged event photo" id="lbImg" />
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div><a href="index.html" class="logo"><span class="logo__mark">E</span>Event<span>ide</span></a><p>Full-service event management for weddings, corporate events, concerts and private celebrations. Crafting unforgettable moments since 2009.</p></div>
+        <div><h4>Company</h4><ul class="footer__links"><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4>Quick Links</h4><ul class="footer__links"><li><a href="calendar.html">Availability</a></li><li><a href="booking.html">Book an Event</a></li><li><a href="tickets.html">Buy Tickets</a></li><li><a href="contact.html">Support</a></li></ul></div>
+        <div><h4>Newsletter</h4><p style="margin-top:0">Get event tips and exclusive offers in your inbox.</p><form class="footer__news"><input type="email" placeholder="Your email" aria-label="Email address" required /><button class="btn btn--primary" type="submit">Join</button></form></div>
+      </div>
+      <div class="footer__bottom">© <span data-year></span> Eventide Event Management. All rights reserved.</div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      // Filters
+      const btns = document.querySelectorAll(".filter-btn");
+      const items = document.querySelectorAll(".gallery-grid figure");
+      btns.forEach((b) => b.addEventListener("click", () => {
+        btns.forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        const f = b.dataset.filter;
+        items.forEach((it) => {
+          const show = f === "all" || it.dataset.cat === f;
+          it.style.display = show ? "" : "none";
+        });
+      }));
+      // Lightbox
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      items.forEach((fig) => fig.addEventListener("click", () => {
+        lbImg.src = fig.querySelector("img").src;
+        lb.classList.add("open");
+      }));
+      const close = () => lb.classList.remove("open");
+      document.getElementById("lbClose").addEventListener("click", close);
+      lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+    })();
+  </script>
+</body>
+</html>
